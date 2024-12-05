@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="body">
+    <section>
+        <div class="maindiv">
+            <div class=" buttons">
+                <button class="btn" id="b1">Click Me</button>
+                <button class="btn" id="b2">Click Me</button>
+            </div>
+            <div class="content">
+                <h1 class="code-title">Copy Your Code By Click On Code</h1>
+                <div id="code-display">
+                    <p id="code-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, ducimus quas amet omnis quis, quaerat saepe eligendi aliquam facere quibusdam dolores exercitationem, at possimus impedit a deserunt optio voluptatum eos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        let display=document.getElementById("code-display")
+        let text=document.getElementById("code-text")
+        let body = document.getElementById("body");
+        let b1=document.getElementById("b1");
+        let b2=document.getElementById("b2");
+        let hexcode="0123456789acbdef";
+        let globalCode1="#123456";
+        let globalCode2="#123456"
+        const hexval =()=>{
+            let hexcode="0123456789acbdef";
+            let code="#";
+            for (let i=0;i<6;i++){
+                code+=hexcode[Math.floor(Math.random(i)*16)];
+            };
+            return code;
+                    
+
+        }
+        const handlebutton1=()=>{
+            let code1=hexval();
+            document.body.style.backgroundImage = `linear-gradient(to right ,${code1},${globalCode2})`;
+            b1.textContent=code1
+            b1.style.backgroundColor=code1;
+            text.innerHTML=`background-image:linear-gradient(to right ,${code1},${globalCode2})`
+            globalCode1=code1;
+        }
+        const handlebutton2=()=>{
+            let code2 = hexval();
+            document.body.style.backgroundImage = `linear-gradient(to right ,${globalCode1},${code2})`;
+            b2.textContent=code2
+            b2.style.backgroundColor=code2;
+            text.innerHTML=`background-image:linear-gradient(to right ,${globalCode1},${code2})`
+            globalCode2=code2;
+        }
+        display.addEventListener("click",()=>{
+            navigator.clipboard.writeText(display.textContent);
+            alert("Code Copied")
+        });
+
+        b1.addEventListener("click",handlebutton1);
+        b2.addEventListener("click",handlebutton2);
+    </script>
+</body>
+</html>
